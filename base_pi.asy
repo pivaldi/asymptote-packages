@@ -29,8 +29,8 @@
 
 import math;
 
-pair userMin(picture pic=currentpicture){return (pic.userMin.x,pic.userMin.y);}
-pair userMax(picture pic=currentpicture){return (pic.userMax.x,pic.userMax.y);}
+pair userMin(picture pic=currentpicture){return (pic.userMin().x,pic.userMin().y);}
+pair userMax(picture pic=currentpicture){return (pic.userMax().x,pic.userMax().y);}
 
 // *=======================================================*
 // *.......................Structures......................*
@@ -145,7 +145,7 @@ real intersectp(path g, pair a, int n=1, real fuzz=0)
 {/*<asyxml></code><documentation>Retourne le "temps" par rapport à 'g' du premier point
     d'intersection de 'g' avec le plus petit cercle de centre 'a'
     coupant 'g'.
-    La précision du découpage peut être augmentée en augmentant 'n'. 
+    La précision du découpage peut être augmentée en augmentant 'n'.
     ..................................................
     Return the time along 'g' of the first intersection point of the path
     "g" with the smaller circle centered in 'a' and which is intersecting

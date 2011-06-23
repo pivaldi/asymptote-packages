@@ -114,10 +114,10 @@ picture millimeterpaper(picture pic=currentpicture, pair O=(0,0),
     cofx=pic.xunitsize/cm,
     cofy=pic.yunitsize/cm;
   real
-    xmin= (xmin <= infinity) ? pic.userMin.x*cofx : xmin*cofx,
-    xmax= (xmax <= infinity) ? pic.userMax.x*cofx : xmax*cofx,
-    ymin= (ymin <= infinity) ? pic.userMin.y*cofy : ymin*cofy,
-    ymax= (ymax <= infinity) ? pic.userMax.y*cofy : ymax*cofy;
+    xmin= (xmin <= infinity) ? pic.userMin().x*cofx : xmin*cofx,
+    xmax= (xmax <= infinity) ? pic.userMax().x*cofx : xmax*cofx,
+    ymin= (ymin <= infinity) ? pic.userMin().y*cofy : ymin*cofy,
+    ymax= (ymax <= infinity) ? pic.userMax().y*cofy : ymax*cofy;
   path
     ph=(xmin*cm,0)--(xmax*cm,0),
     pv=(0,ymin*cm)--(0,ymax*cm);
@@ -144,8 +144,8 @@ picture millimeterpaper(picture pic=currentpicture, pair O=(0,0),
 // *=======================================================*
 /*ANCgridANC*/
 void grid(picture pic=currentpicture,
-          real xmin=pic.userMin.x, real xmax=pic.userMax.x,
-          real ymin=pic.userMin.y, real ymax=pic.userMax.y,
+          real xmin=pic.userMin().x, real xmax=pic.userMax().x,
+          real ymin=pic.userMin().y, real ymax=pic.userMax().y,
           real xStep=1, real xstep=.5,
           real yStep=1, real ystep=.5,
           pen pTick=nullpen, pen ptick=grey, bool above=false)
@@ -175,10 +175,10 @@ void cartesianaxis(picture pic=currentpicture,
                    arrowbar arrow=Arrow)
 {
   graphicrules.set(pic);
-  xmin=(xmin == -infinity) ? pic.userMin.x : xmin;
-  xmax=(xmax == infinity) ? pic.userMax.x : xmax;
-  ymin=(ymin == -infinity) ? pic.userMin.y : ymin;
-  ymax=(ymax == infinity) ? pic.userMax.y : ymax;
+  xmin=(xmin == -infinity) ? pic.userMin().x : xmin;
+  xmax=(xmax == infinity) ? pic.userMax().x : xmax;
+  ymin=(ymin == -infinity) ? pic.userMin().y : ymin;
+  ymax=(ymax == infinity) ? pic.userMax().y : ymax;
   extraheight= pic.yunitsize != 0 ? cm*extraheight/(2*pic.yunitsize) : 0;
   extrawidth = pic.xunitsize != 0 ? cm*extrawidth/(2*pic.xunitsize) : 0;
   if (viewxaxis)
@@ -394,7 +394,7 @@ void draw(picture pic=currentpicture, Label L="", recursivegraph g, recursiverou
 guide graph(picture pic=currentpicture, real f(real),
             int n=ngraph, interpolate join=operator --)
 {
-  return graph(pic, f, a=pic.userMin.x, b=pic.userMax.x, n, join);
+  return graph(pic, f, a=pic.userMin().x, b=pic.userMax().x, n, join);
 }
 
 
@@ -414,12 +414,12 @@ void graphpoint(picture pic=currentpicture,
   /*EXAgraphpoint(...)EXA*/
   real xmax,ymax;
   if (extendy) {
-    xmin=pic.userMin.x;
-    xmax=pic.userMax.x;
+    xmin=pic.userMin().x;
+    xmax=pic.userMax().x;
   } else xmax=xCoordinate;
   if (extendx) {
-    ymin=pic.userMin.y;
-    ymax=pic.userMax.y;
+    ymin=pic.userMin().y;
+    ymax=pic.userMax().y;
   } else ymax=f(xCoordinate);
   px = (px==nullpen) ? currentpen+linetype("6 6") : px;
   py = (py==nullpen) ? currentpen+linetype("6 6") : py;
