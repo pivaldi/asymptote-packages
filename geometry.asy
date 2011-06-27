@@ -3543,7 +3543,7 @@ path arcfromcenter(ellipse el, real angle1, real angle2,
   if (angle1 > angle2)
     return reverse(arcfromcenter(el, angle2, angle1, !direction, n));
 
-  path op;
+  guide op;
   coordsys Rp=coordsys(el);
   if (n < 1) return op;
 
