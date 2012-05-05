@@ -67,13 +67,9 @@ void graphicrules(picture pic=currentpicture, real unit=1cm,
   graphicrules.xcrop=xcrop;
   graphicrules.ycrop=ycrop;
   pic.unitsize(x=xunit,y=yunit);
-  // xlimits(pic,xmin, xmax, xcrop);
-  // ylimits(pic,ymin, ymax, ycrop);
   graphicrules.set(pic);
   graph_pi_exitfunction = new void() {
     graphicrules.set(pic);
-    // xlimits(pic,xmin, xmax, xcrop);
-    // ylimits(pic,ymin, ymax, ycrop);
   };
 
 }
@@ -92,8 +88,7 @@ ticklabel labelfrac(real ep=1/10^5, real factor=1,
                     bool displaystyle=false,
                     bool zero=true)
 {
-  return new string(real x)
-    {
+  return new string(real x) {
       return texfrac(rational(x/factor), symbol, signin, symbolin, displaystyle, zero);
     };
 }
@@ -111,29 +106,33 @@ picture millimeterpaper(picture pic=currentpicture, pair O=(0,0),
 {
   picture opic;
   real
-    cofx=pic.xunitsize/cm,
-    cofy=pic.yunitsize/cm;
+    cofx = pic.xunitsize/cm,
+    cofy = pic.yunitsize/cm;
   real
-    xmin= (xmin <= infinity) ? pic.userMin().x*cofx : xmin*cofx,
-    xmax= (xmax <= infinity) ? pic.userMax().x*cofx : xmax*cofx,
-    ymin= (ymin <= infinity) ? pic.userMin().y*cofy : ymin*cofy,
-    ymax= (ymax <= infinity) ? pic.userMax().y*cofy : ymax*cofy;
+    xmin = (xmin == infinity) ? pic.userMin().x*cofx : xmin*cofx,
+    xmax = (xmax == infinity) ? pic.userMax().x*cofx : xmax*cofx,
+    ymin = (ymin == infinity) ? pic.userMin().y*cofy : ymin*cofy,
+    ymax = (ymax == infinity) ? pic.userMax().y*cofy : ymax*cofy;
   path
-    ph=(xmin*cm,0)--(xmax*cm,0),
-    pv=(0,ymin*cm)--(0,ymax*cm);
+    ph = (xmin*cm, 0)--(xmax*cm, 0),
+    pv = (0, ymin*cm)--(0, ymax*cm);
   real [] step={5, 1, .5, .1};
   pen [] p_={ p, scale(.7)*p, scale(.4)*p, scale(.2)*p};
 
   for (int j=0; j<4; ++j)
     {
-      for (real i=O.y; i<= ymax; i+=step[j])
-        draw(opic, shift(0,i*cm)*ph, p_[j]);
-      for (real i=O.y; i>=ymin ; i-=step[j])
-        draw(opic, shift(0,i*cm)*ph, p_[j]);
-      for (real i=O.x; i<=xmax; i+=step[j])
-        draw(opic, shift(i*cm,0)*pv, p_[j]);
-      for (real i=O.x; i>=xmin; i-=step[j])
-        draw(opic, shift(i*cm,0)*pv, p_[j]);
+      for (real i=O.y; i <= ymax; i += step[j]) {
+        draw(opic, shift(0, i*cm) * ph, p_[j]);
+          }
+      for (real i=O.y; i >= ymin ; i -= step[j]) {
+        draw(opic, shift(0, i*cm) * ph, p_[j]);
+      }
+      for (real i=O.x; i <= xmax; i += step[j]) {
+        draw(opic, shift(i*cm, 0) * pv, p_[j]);
+      }
+      for (real i=O.x; i >= xmin; i -= step[j]) {
+        draw(opic, shift(i*cm, 0) * pv, p_[j]);
+      }
     }
 
   return opic;
