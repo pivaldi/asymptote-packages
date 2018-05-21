@@ -119,7 +119,7 @@ picture millimeterpaper(picture pic=currentpicture, pair O=(0,0),
   real [] step={5, 1, .5, .1};
   pen [] p_={ p, scale(.7)*p, scale(.4)*p, scale(.2)*p};
 
-  for (int j=0; j<4; ++j)
+  for (int j = 0; j < 4; ++j)
     {
       for (real i=O.y; i <= ymax; i += step[j]) {
         draw(opic, shift(0, i*cm) * ph, p_[j]);
