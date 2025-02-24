@@ -30,9 +30,9 @@ picture carteApoints(int n)
 {
   picture opic, pic;
   size(opic,18cm,0);
-  label(pic, scale(n == 1 ? 5 : 6)*graphic("main"+(string)(n < 6 ? n : 5)+".eps"));
+  label(pic, scale(n == 1 ? 5 : 6)*graphic("main"+(string)(n < 6 ? n : 5)+"."+settings.outformat));
   if(n > 5)
-    label(pic,shift(1.8*(max(pic).x,0))*reflect(N,S)*scale(n-5 == 1 ? 5 : 6)*graphic("main"+(string)(n-5)+".eps"));
+    label(pic,shift(1.8*(max(pic).x,0))*reflect(N,S)*scale(n-5 == 1 ? 5 : 6)*graphic("main"+(string)(n-5)+"."+settings.outformat));
   add(opic, shift(-(min(pic)+max(pic))/2)*pic);
   layer(opic);
 
